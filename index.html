@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thomas Varga</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:      #f5f0e8;
+    --bg2:     #ede8df;
+    --bg3:     #e4ddd2;
+    --border:  #d6cfc3;
+    --text:    #2c2825;
+    --muted:   #6b6259;
+    --dim:     #a89e93;
+    --green:   #4a7c59;
+    --blue:    #3d6e99;
+    --orange:  #8f4e2a;
+    --yellow:  #7a6a2a;
+    --mono:    'IBM Plex Mono', monospace;
+    --sans:    'IBM Plex Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 5rem;
+  }
+
+  .nav-name {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  section { margin-bottom: 6rem; }
+
+  .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--green);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.4rem;
+  }
+
+  h2 {
+    font-family: var(--sans);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 2rem;
+  }
+
+  /* HERO */
+  .hero-name {
+    font-family: var(--sans);
+    font-size: 38px;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-name strong { font-weight: 500; }
+
+  .hero-sub {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--blue);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-bio {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 560px;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .hero-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+
+  .hero-links a {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.15s;
+  }
+
+  .hero-links a:hover { color: var(--text); }
+  .hero-links a::before { content: '→'; color: var(--green); font-size: 11px; }
+
+  /* PROJECTS */
+  .project {
+    padding: 1.75rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .project:last-child { border-bottom: 1px solid var(--border); }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .project-title { font-size: 16px; font-weight: 500; color: var(--text); }
+
+  .project-date {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--dim);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .project-desc {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+    max-width: 620px;
+  }
+
+  .project-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--orange);
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 2px 10px;
+    border-radius: 3px;
+  }
+
+  .project-link {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--blue);
+    text-decoration: none;
+    margin-top: 0.75rem;
+    display: inline-block;
+    transition: opacity 0.15s;
+  }
+
+  .project-link:hover { opacity: 0.65; }
+
+  .project-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 1rem;
+    max-width: 620px;
+  }
+  .project-images img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: var(--bg2);
+  }
+  @media (max-width: 520px) {
+    .project-images { grid-template-columns: 1fr; }
+  }
+
+
+  /* GALLERY */
+  .gallery-note {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--dim);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 8px;
+  }
+
+  .gallery-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .gallery-empty {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--dim);
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  /* EXPERIENCE */
+  .exp-item {
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .exp-item:last-child { border-bottom: 1px solid var(--border); }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.25rem;
+    flex-wrap: wrap;
+  }
+
+  .exp-role { font-size: 15px; font-weight: 500; color: var(--text); }
+
+  .exp-date {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--dim);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .exp-company {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--blue);
+    margin-bottom: 0.75rem;
+  }
+
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+
+  .exp-bullets li {
+    font-size: 13px;
+    color: var(--muted);
+    padding-left: 1.25rem;
+    position: relative;
+    line-height: 1.65;
+  }
+
+  .exp-bullets li::before { content: '–'; position: absolute; left: 0; color: var(--dim); }
+
+  /* SKILLS */
+  .skills-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 2rem;
+  }
+
+  .skill-group-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--yellow);
+    margin-bottom: 0.6rem;
+  }
+
+  .skill-group ul { list-style: none; display: flex; flex-direction: column; gap: 3px; }
+  .skill-group ul li { font-size: 13px; color: var(--muted); }
+
+  /* CONTACT */
+  .contact-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+
+  .contact-list li { display: flex; gap: 1rem; align-items: baseline; }
+
+  .c-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--dim);
+    min-width: 70px;
+  }
+
+  .contact-list a {
+    font-size: 14px;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: border-color 0.15s;
+  }
+
+  .contact-list a:hover { border-color: var(--muted); }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 0 3rem;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--dim);
+  }
+
+  @media (max-width: 520px) {
+    .nav-links { display: none; }
+    .hero-name { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-name">thomas varga</a>
+  <ul class="nav-links">
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#gallery">gallery</a></li>
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <h1 class="hero-name"><strong>Thomas</strong> Varga</h1>
+  <p class="hero-sub">// EE — Moorpark College → USC</p>
+  <p class="hero-bio">
+    Currently studying Electrical and Computer Engineering at Moorpark College, transferring to USC fall 2026. I build things — embedded systems, mechanical designs, and hardware prototypes. Interested in robotics, sensors, and circuits. Currently 4.0 GPA at Moorpark College, transferring fall 2026.
+  </p>
+  <div class="hero-links">
+    <a href="mailto:tommy32507@outlook.com">tommy32507@outlook.com</a>
+    <a href="https://linkedin.com/in/thomasrvarga/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/thomasrvarga" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</section>
+
+<section id="projects">
+  <p class="label">// projects</p>
+  <h2>What I've Built</h2>
+
+  <div class="project">
+    <div class="project-header">
+      <span class="project-title">Ultrasonic Radar System</span>
+      <span class="project-date">April 2026</span>
+    </div>
+    <p class="project-desc">
+      Embedded radar system using an Arduino Nano and servo-driven ultrasonic sensor, sweeping 30°–180° for continuous live environment scanning. Built a serial communication pipeline between Arduino firmware and a custom Web Serial browser interface for real-time object detection and distance-based alerts.
+    </p>
+    <div class="project-tags">
+      <span class="tag">Arduino Nano</span>
+      <span class="tag">C++</span>
+      <span class="tag">Ultrasonic Sensor</span>
+      <span class="tag">Web Serial</span>
+      <span class="tag">Servo</span>
+    </div>
+    <a href="#" class="project-link">→ github.com/thomasrvarga/radar</a>
+  </div>
+
+  <div class="project">
+    <div class="project-header">
+      <span class="project-title">Centrifugal Water Pump</span>
+      <span class="project-date">December 2025</span>
+    </div>
+    <p class="project-desc">
+      Designed and fabricated a functional centrifugal pump from scratch. Created 3D models and detailed engineering drawings in SolidWorks and AutoCAD, then built a custom chamber integrated with a DC motor. Validated through fluid flow testing with minimal leakage.
+    </p>
+    <div class="project-images">
+      <img src="images/pump1.png" alt="Centrifugal pump CAD model">
+      <img src="images/pump2.png" alt="Centrifugal pump assembled">
+    </div>
+    <div class="project-tags">
+      <span class="tag">SolidWorks</span>
+      <span class="tag">AutoCAD</span>
+      <span class="tag">Fabrication</span>
+      <span class="tag">DC Motor</span>
+      <span class="tag">Engineering Drawings</span>
+    </div>
+    <a href="#" class="project-link">→ github.com/thomasrvarga/pump</a>
+</div>
+</section>
+
+<section id="gallery">
+  <p class="label">// cad work</p>
+  <h2>Design Gallery</h2>
+  <p class="gallery-note">SolidWorks models and engineering drawings.</p>
+  <div class="gallery-grid">
+    <div class="gallery-item"><img src="images/render1.png" alt="CAD render 1"></div>
+    <div class="gallery-item"><img src="images/render2.png" alt="CAD render 2"></div>
+    <div class="gallery-item"><img src="images/render3.png" alt="CAD render 3"></div>
+    <div class="gallery-item"><img src="images/render4.png" alt="CAD render 4"></div>
+    <div class="gallery-item"><img src="images/render5.png" alt="CAD render 5"></div>
+    <div class="gallery-item"><img src="images/render6.png" alt="CAD render 6"></div>
+</div>
+</section>
+
+<section id="experience">
+  <p class="label">// experience</p>
+  <h2>Work</h2>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <span class="exp-role">Associate Project Manager</span>
+      <span class="exp-date">Aug 2025 – Present</span>
+    </div>
+    <p class="exp-company">Victogen Pharma — Los Angeles, CA</p>
+    <ul class="exp-bullets">
+      <li>Coordinated project timelines and deliverables across R&D and Quality in a regulated biotech environment.</li>
+      <li>Developed controlled documentation including batch records, calibration sheets, and cleaning procedures.</li>
+      <li>Tracked milestones in Excel and Notion; directed weekly meetings and followed up on action items.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <span class="exp-role">Woods-Shop Intern</span>
+      <span class="exp-date">Jul 2024 – Jun 2025</span>
+    </div>
+    <p class="exp-company">Design Make Sell (DMS) Solutions — Simi Valley, CA</p>
+    <ul class="exp-bullets">
+      <li>Planned and executed custom wood product designs from concept through revision to completion.</li>
+      <li>Supported marketing through online platforms and in-person community events.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="skills">
+  <p class="label">// skills</p>
+  <h2>Toolkit</h2>
+  <div class="skills-row">
+    <div class="skill-group">
+      <p class="skill-group-label">CAD / Design</p>
+      <ul>
+        <li>SolidWorks</li>
+        <li>AutoCAD</li>
+        <li>Engineering Drawings</li>
+        <li>KiCad</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-label">Embedded / Hardware</p>
+      <ul>
+        <li>Arduino</li>
+        <li>C++</li>
+        <li>Ultrasonic Sensing</li>
+        <li>Embedded Systems</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-label">Software</p>
+      <ul>
+        <li>Python</li>
+        <li>Git / GitHub</li>
+        <li>Arduino IDE</li>
+        <li>Notion / Excel</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-label">Professional</p>
+      <ul>
+        <li>Technical Writing</li>
+        <li>Controlled Documentation</li>
+        <li>Project Management</li>
+        <li>Cross-Collaboration</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <p class="label">// contact</p>
+  <h2>Get in Touch</h2>
+  <ul class="contact-list">
+    <li>
+      <span class="c-label">email</span>
+      <a href="mailto:tommy32507@outlook.com">tommy32507@outlook.com</a>
+    </li>
+    <li>
+      <span class="c-label">linkedin</span>
+      <a href="https://linkedin.com/in/thomasrvarga/" target="_blank" rel="noopener">linkedin.com/in/thomasrvarga</a>
+    </li>
+    <li>
+      <span class="c-label">github</span>
+      <a href="https://github.com/thomasrvarga" target="_blank" rel="noopener">github.com/thomasrvarga</a>
+    </li>
+    <li>
+      <span class="c-label">location</span>
+      <span style="font-size:14px; color: var(--muted);">Simi Valley, CA</span>
+    </li>
+  </ul>
+</section>
+
+<footer>Thomas Varga — Moorpark College → USC · Built with HTML/CSS</footer>
+
+</body>
+</html>
